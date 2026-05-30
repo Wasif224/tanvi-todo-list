@@ -37,7 +37,11 @@ st.markdown("""
             width: 100%;
             margin: 5px 0;
         }
-        div[data-testid="stCheckbox"] label {
+        div[data-testid="stCheckbox"] label,
+        div[data-testid="stCheckbox"] label p,
+        div[data-testid="stCheckbox"] p,
+        .stCheckbox span p,
+        label[data-baseweb="checkbox"] span {
             color: #6a00b8 !important;
             font-size: 16px !important;
         }
@@ -67,7 +71,7 @@ if st.session_state.page == "home":
     st.markdown(" ")
     st.markdown(" ")
     st.markdown("<h1 style='text-align:center;'>🌸 Tanvi's To-Do List 🌸</h1>", unsafe_allow_html=True)
-    st.markdown("<p style='text-align:center; color:#9b30e8; font-style:italic; font-size:14px;'>Made with 🌟 by Wasif</p>", unsafe_allow_html=True)
+    st.markdown("<p style='text-align:center; color:#9b30e8; font-style:italic; font-size:14px;'>Made by Wasif 🌟</p>", unsafe_allow_html=True)
     st.markdown("<p style='text-align:center; font-size:20px;'>🌷 🌸 🌼 🌷</p>", unsafe_allow_html=True)
     st.markdown(" ")
 
@@ -102,7 +106,6 @@ elif st.session_state.page == "view":
     if len(st.session_state.tasks) == 0:
         st.markdown("<p style='color:#9b30e8; text-align:center; font-size:16px;'>No tasks yet! Add something 🌸</p>", unsafe_allow_html=True)
     else:
-        # Fix — calculate from session state directly before rendering
         total = len(st.session_state.tasks)
         done_count = sum(1 for t in st.session_state.tasks if t["done"])
 
@@ -114,7 +117,6 @@ elif st.session_state.page == "view":
             st.balloons()
             st.markdown("<h3 style='text-align:center; color:#7b00cc;'>🌟 All done! Amazing work! 🌟</h3>", unsafe_allow_html=True)
 
-        # Fix — update state first, then rerun so progress bar syncs
         for i, task in enumerate(st.session_state.tasks):
             checked = st.checkbox(
                 task["task"],
@@ -180,4 +182,4 @@ elif st.session_state.page == "delete":
         st.rerun()
 
 st.markdown(" ")
-st.markdown("<p style='text-align:center; color:#9b30e8; font-size:12px;'>Made with 🌟 by Wasif</p>", unsafe_allow_html=True)
+st.markdown("<p style='text-align:center; color:#9b30e8; font-size:12px;'>Made by Wasif 🌟</p>", unsafe_allow_html=True)
