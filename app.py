@@ -34,7 +34,7 @@ st.markdown("""
             width: 100%;
         }
         .stCheckbox label {
-            color: #555 !important;
+            color: #7a007a !important;
             font-size: 16px;
         }
         .stProgress > div > div {
@@ -52,23 +52,26 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 st.markdown("<h1 style='text-align:center;'>🌸 Tanvi's To-Do List 🌸</h1>", unsafe_allow_html=True)
-st.markdown("<p style='text-align:center; color:#9b59b6; font-style:italic; font-size:14px;'>Made by Wasif🌟</p>", unsafe_allow_html=True)
+st.markdown("<p style='text-align:center; color:#9b59b6; font-style:italic; font-size:14px;'>Made with 🌟 by Wasif</p>", unsafe_allow_html=True)
 st.markdown("<p style='text-align:center; font-size:20px;'>🌷 🌸 🌼 🌷</p>", unsafe_allow_html=True)
 
 st.markdown("---")
 
 if "tasks" not in st.session_state:
     st.session_state.tasks = []
+if "input_key" not in st.session_state:
+    st.session_state.input_key = 0
 
 st.markdown("<h3 style='color:#c0007a;'>✨ Add a new task</h3>", unsafe_allow_html=True)
 col1, col2 = st.columns([4, 1])
 with col1:
-    new_task = st.text_input("", placeholder="What do you need to do? 🌸", label_visibility="collapsed")
+    new_task = st.text_input("", placeholder="What do you need to do? 🌸", label_visibility="collapsed", key=f"input_{st.session_state.input_key}")
 with col2:
     st.markdown("<br>", unsafe_allow_html=True)
     if st.button("Add 🌸"):
         if new_task.strip() != "":
             st.session_state.tasks.append({"task": new_task, "done": False})
+            st.session_state.input_key += 1
             st.rerun()
 
 st.markdown("---")
@@ -106,5 +109,5 @@ else:
         st.rerun()
 
 st.markdown("---")
-st.markdown("<p style='text-align:center; color:#c0007a; font-size:15px;'>💪 You're doing great baby, keep going! 🌸</p>", unsafe_allow_html=True)
-st.markdown("<p style='text-align:center; color:#9b59b6; font-size:12px;'>Made by Wasif🌟</p>", unsafe_allow_html=True)
+st.markdown("<p style='text-align:center; color:#c0007a; font-size:15px;'>💪 You're doing great, keep going! 🌸</p>", unsafe_allow_html=True)
+st.markdown("<p style='text-align:center; color:#9b59b6; font-size:12px;'>Made with 🌟 by Wasif</p>", unsafe_allow_html=True)
