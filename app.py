@@ -52,7 +52,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 st.markdown("<h1 style='text-align:center;'>🌸 Tanvi's To-Do List 🌸</h1>", unsafe_allow_html=True)
-st.markdown("<p style='text-align:center; color:#9b59b6; font-style:italic; font-size:14px;'>Made with 🌟 by Wasif</p>", unsafe_allow_html=True)
+st.markdown("<p style='text-align:center; color:#9b59b6; font-style:italic; font-size:14px;'>Made by Wasif🌟</p>", unsafe_allow_html=True)
 st.markdown("<p style='text-align:center; font-size:20px;'>🌷 🌸 🌼 🌷</p>", unsafe_allow_html=True)
 
 st.markdown("---")
@@ -106,5 +106,5 @@ else:
         st.rerun()
 
 st.markdown("---")
-st.markdown("<p style='text-align:center; color:#c0007a; font-size:15px;'>💪 You're doing great, keep going! 🌸</p>", unsafe_allow_html=True)
-st.markdown("<p style='text-align:center; color:#9b59b6; font-size:12px;'>Made with 🌟 by Wasif</p>", unsafe_allow_html=True)
+st.markdown("<p style='text-align:center; color:#c0007a; font-size:15px;'>💪 You're doing great baby, keep going! 🌸</p>", unsafe_allow_html=True)
+st.markdown("<p style='text-align:center; color:#9b59b6; font-size:12px;'>Made by Wasif🌟</p>", unsafe_allow_html=True)
