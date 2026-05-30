@@ -77,7 +77,7 @@ if st.session_state.page == "home":
     st.markdown(" ")
     st.markdown(" ")
     st.markdown("<h1 style='text-align:center;'>🌸 Tanvi's To-Do List 🌸</h1>", unsafe_allow_html=True)
-    st.markdown("<p style='text-align:center; color:#9b59b6; font-style:italic; font-size:14px;'>Made with 🌟 by Wasif</p>", unsafe_allow_html=True)
+    st.markdown("<p style='text-align:center; color:#9b59b6; font-style:italic; font-size:14px;'>Made by Wasif🌟</p>", unsafe_allow_html=True)
     st.markdown("<p style='text-align:center; font-size:20px;'>🌷 🌸 🌼 🌷</p>", unsafe_allow_html=True)
     st.markdown(" ")
 
@@ -186,4 +186,4 @@ elif st.session_state.page == "delete":
         st.rerun()
 
 st.markdown(" ")
-st.markdown("<p style='text-align:center; color:#9b59b6; font-size:12px;'>Made with 🌟 by Wasif</p>", unsafe_allow_html=True)
+st.markdown("<p style='text-align:center; color:#9b59b6; font-size:12px;'>Made By Wasif🌟</p>", unsafe_allow_html=True)
