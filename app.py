@@ -5,22 +5,22 @@ st.set_page_config(page_title="Tanvi's To-Do List", page_icon="🌸", layout="ce
 st.markdown("""
     <style>
         .stApp {
-            background: linear-gradient(135deg, #ffe6f0, #f3e6ff);
+            background: linear-gradient(135deg, #f3e6ff, #e6d5ff);
         }
         h1, h2, h3 {
-            color: #c0007a !important;
+            color: #7b00cc !important;
         }
         .stMarkdown p {
-            color: #7a007a !important;
+            color: #6a00b8 !important;
         }
         section[data-testid="stSidebar"] {
             display: none;
         }
         .stTextInput>div>input {
             border-radius: 20px;
-            border: 2px solid #ffb6d9;
+            border: 2px solid #c485f5;
             background: white;
-            color: #7a007a !important;
+            color: #6a00b8 !important;
             font-size: 16px;
             padding: 10px;
         }
@@ -28,7 +28,7 @@ st.markdown("""
             color: #c485f5 !important;
         }
         .stButton>button {
-            background: linear-gradient(90deg, #ff85b3, #c785f5);
+            background: linear-gradient(90deg, #c785f5, #9b30e8);
             color: white !important;
             border: none;
             border-radius: 20px;
@@ -37,22 +37,12 @@ st.markdown("""
             width: 100%;
             margin: 5px 0;
         }
-        .stCheckbox label p {
-            color: #7a007a !important;
-            font-size: 16px !important;
-        }
-        .stCheckbox label {
-            color: #7a007a !important;
-            font-size: 16px !important;
-        }
-        .stCheckbox span {
-            color: #7a007a !important;
-        }
         div[data-testid="stCheckbox"] label {
-            color: #7a007a !important;
+            color: #6a00b8 !important;
+            font-size: 16px !important;
         }
         .stProgress > div > div {
-            background: linear-gradient(90deg, #ff85b3, #c785f5);
+            background: linear-gradient(90deg, #c785f5, #7b00cc);
         }
         @media (max-width: 768px) {
             .stTextInput>div>input {
@@ -77,16 +67,15 @@ if st.session_state.page == "home":
     st.markdown(" ")
     st.markdown(" ")
     st.markdown("<h1 style='text-align:center;'>🌸 Tanvi's To-Do List 🌸</h1>", unsafe_allow_html=True)
-    st.markdown("<p style='text-align:center; color:#9b59b6; font-style:italic; font-size:14px;'>Made by Wasif🌟</p>", unsafe_allow_html=True)
+    st.markdown("<p style='text-align:center; color:#9b30e8; font-style:italic; font-size:14px;'>Made with 🌟 by Wasif</p>", unsafe_allow_html=True)
     st.markdown("<p style='text-align:center; font-size:20px;'>🌷 🌸 🌼 🌷</p>", unsafe_allow_html=True)
     st.markdown(" ")
 
     total = len(st.session_state.tasks)
     done_count = sum(1 for t in st.session_state.tasks if t["done"])
-    st.markdown(f"<p style='text-align:center; color:#9b59b6; font-size:16px;'>📋 {total} tasks &nbsp;|&nbsp; ✅ {done_count} completed</p>", unsafe_allow_html=True)
+    st.markdown(f"<p style='text-align:center; color:#9b30e8; font-size:16px;'>📋 {total} tasks &nbsp;|&nbsp; ✅ {done_count} completed</p>", unsafe_allow_html=True)
 
     st.markdown(" ")
-
     col1, col2, col3 = st.columns([1, 2, 1])
     with col2:
         if st.button("📋  View My Tasks"):
@@ -103,7 +92,7 @@ if st.session_state.page == "home":
 
     st.markdown(" ")
     st.markdown(" ")
-    st.markdown("<p style='text-align:center; color:#c0007a; font-size:14px;'>💪 You're doing great, keep going! 🌸</p>", unsafe_allow_html=True)
+    st.markdown("<p style='text-align:center; color:#7b00cc; font-size:14px;'>💪 You're doing great, keep going! 🌸</p>", unsafe_allow_html=True)
 
 # --- VIEW TASKS PAGE ---
 elif st.session_state.page == "view":
@@ -111,25 +100,30 @@ elif st.session_state.page == "view":
     st.markdown(" ")
 
     if len(st.session_state.tasks) == 0:
-        st.markdown("<p style='color:#9b59b6; text-align:center; font-size:16px;'>No tasks yet! Add something 🌸</p>", unsafe_allow_html=True)
+        st.markdown("<p style='color:#9b30e8; text-align:center; font-size:16px;'>No tasks yet! Add something 🌸</p>", unsafe_allow_html=True)
     else:
+        # Fix — calculate from session state directly before rendering
         total = len(st.session_state.tasks)
         done_count = sum(1 for t in st.session_state.tasks if t["done"])
+
         st.progress(done_count / total)
-        st.markdown(f"<p style='color:#9b59b6;'>✅ {done_count} of {total} tasks completed</p>", unsafe_allow_html=True)
+        st.markdown(f"<p style='color:#9b30e8;'>✅ {done_count} of {total} tasks completed</p>", unsafe_allow_html=True)
         st.markdown(" ")
 
         if done_count == total and total > 0:
             st.balloons()
-            st.markdown("<h3 style='text-align:center; color:#c0007a;'>🌟 All done! Amazing work! 🌟</h3>", unsafe_allow_html=True)
+            st.markdown("<h3 style='text-align:center; color:#7b00cc;'>🌟 All done! Amazing work! 🌟</h3>", unsafe_allow_html=True)
 
+        # Fix — update state first, then rerun so progress bar syncs
         for i, task in enumerate(st.session_state.tasks):
             checked = st.checkbox(
                 task["task"],
-                value=task["done"],
+                value=st.session_state.tasks[i]["done"],
                 key=f"task_{i}"
             )
-            st.session_state.tasks[i]["done"] = checked
+            if checked != st.session_state.tasks[i]["done"]:
+                st.session_state.tasks[i]["done"] = checked
+                st.rerun()
 
     st.markdown(" ")
     if st.button("⬅️  Back to Home"):
@@ -164,14 +158,14 @@ elif st.session_state.page == "delete":
     st.markdown(" ")
 
     if len(st.session_state.tasks) == 0:
-        st.markdown("<p style='color:#9b59b6; text-align:center;'>No tasks to delete! 🌸</p>", unsafe_allow_html=True)
+        st.markdown("<p style='color:#9b30e8; text-align:center;'>No tasks to delete! 🌸</p>", unsafe_allow_html=True)
     else:
         to_delete = None
         for i, task in enumerate(st.session_state.tasks):
             col1, col2 = st.columns([5, 1])
             with col1:
                 checkbox = "✅" if task["done"] else "⬜"
-                st.markdown(f"<p style='color:#7a007a; font-size:16px; padding-top:8px;'>{checkbox} {task['task']}</p>", unsafe_allow_html=True)
+                st.markdown(f"<p style='color:#6a00b8; font-size:16px; padding-top:8px;'>{checkbox} {task['task']}</p>", unsafe_allow_html=True)
             with col2:
                 if st.button("🗑️", key=f"del_{i}"):
                     to_delete = i
@@ -186,4 +180,4 @@ elif st.session_state.page == "delete":
         st.rerun()
 
 st.markdown(" ")
-st.markdown("<p style='text-align:center; color:#9b59b6; font-size:12px;'>Made By Wasif🌟</p>", unsafe_allow_html=True)
+st.markdown("<p style='text-align:center; color:#9b30e8; font-size:12px;'>Made with 🌟 by Wasif</p>", unsafe_allow_html=True)
